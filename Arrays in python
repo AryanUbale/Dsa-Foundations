@@ -1,0 +1,96 @@
+# Array Operations in Python
+
+# 1. Reverse an Array
+
+def reverse_array(arr):
+    """
+    Reverses the array in-place.
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+    """
+    left, right = 0, len(arr) - 1
+    while left < right:
+        arr[left], arr[right] = arr[right], arr[left]
+        left += 1
+        right -= 1
+    return arr
+
+
+# 2. Find Maximum and Minimum
+
+def find_max_min(arr):
+    """
+    Finds the maximum and minimum elements in the array.
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+    """
+    if not arr:
+        return None, None
+
+    max_val = min_val = arr[0]
+    for num in arr:
+        if num > max_val:
+            max_val = num
+        if num < min_val:
+            min_val = num
+
+    return max_val, min_val
+
+
+
+# 3. Rotate Array
+
+def rotate_array(arr, k):
+    """
+    Rotates the array to the right by k positions.
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+    """
+    n = len(arr)
+    if n == 0:
+        return arr
+
+    k = k % n  # Handle k > n
+
+    # Reverse helper function
+    def reverse(start, end):
+        while start < end:
+            arr[start], arr[end] = arr[end], arr[start]
+            start += 1
+            end -= 1
+
+    reverse(0, n - 1)
+    reverse(0, k - 1)
+    reverse(k, n - 1)
+
+    return arr
+
+# 4. Linear Search
+def linear_search(arr, target):
+    """
+    Searches for target in array using linear search.
+    Time Complexity: O(n)
+    """
+    for index, value in enumerate(arr):
+        if value == target:
+            return index
+    return -1
+
+
+
+# 5. Binary Search (Array must be sorted)
+
+def binary_search(arr, target):
+    """
+    Searches for target using binary search.
+    Time Complexity: O(log n)
+    NOTE: Array must be sorted.
+    """
+    left, right = 0, len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
